@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>掲示板</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- ここに投稿内容が表示される -->
+    <div id="posts">
+      <!-- 投稿された内容がここに表示されます -->
+    </div>
+
+    <!-- 文字入力欄と投稿ボタン -->
+  <div class="post-form">
+    <!-- 画像挿入ボタン -->
+    <button class="image-upload-btn">画像挿入</button>
+    <!-- 画像選択のためのファイル入力（隠す） -->
+    <input type="file" id="image-upload-input" style="display:none;">
+    <!-- 文字入力欄 -->
+    <textarea id="post-input" placeholder="メッセージを入力..."></textarea>
+    <!-- 投稿ボタン -->
+    <button id="post-button">投稿</button>
+  </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

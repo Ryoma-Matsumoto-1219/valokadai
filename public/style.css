@@ -1,0 +1,77 @@
+/* 全体のレイアウト */
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* コンテナ */
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* 投稿内容の表示エリア */
+#posts {
+  flex-grow: 1; /* 残りの空間を埋める */
+  overflow-y: auto; /* もし投稿が多くなったらスクロール可能 */
+  margin-bottom: 20px;
+}
+
+/* 文字入力欄と投稿ボタンの配置 */
+.post-form {
+  display: flex;
+  flex-direction: row;  /* 横並びにする */
+  align-items: center;  /* 縦方向で中央揃え */
+  margin-top: 20px;
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  background-color: white;
+  padding: 10px;
+  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+textarea {
+  width: 70%;  /* 入力欄の幅を調整 */
+  height: 40px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none; /* ユーザーがリサイズできないようにする */
+  margin-left: 10px; /* ボタンとの間に隙間を作る */
+  margin-right: 10px;
+}
+
+/* 画像挿入ボタン */
+.image-upload-btn {
+  padding: 10px 20px;
+  background-color: #008CBA;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px; /* 入力欄との間に隙間を空ける */
+}
+
+.image-upload-btn:hover {
+  background-color: #007bb5;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
