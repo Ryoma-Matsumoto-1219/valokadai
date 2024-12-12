@@ -14,6 +14,57 @@ body, html {
   box-sizing: border-box;
 }
 
+/* スレッド作成フォーム */
+.thread-form {
+  display: flex;
+  flex-direction: row; /* 横並びにする */
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.thread-form input {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.thread-form button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.thread-form button:hover {
+  background-color: #45a049;
+}
+
+/* スレッド一覧 */
+#threads {
+  margin-bottom: 20px;
+}
+
+#threads .thread {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+#threads .thread:hover {
+  background-color: #f1f1f1;
+}
+
+#threads .thread.active {
+  background-color: #e0e0e0;
+  border-color: #b0b0b0;
+}
+
 /* 投稿内容の表示エリア */
 #posts {
   flex-grow: 1; /* 残りの空間を埋める */

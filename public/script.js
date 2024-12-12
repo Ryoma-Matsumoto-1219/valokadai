@@ -1,7 +1,30 @@
 window.onload = function() {
+  // サーバーからスレッドデータを取得して表示する関数
+  function loadThreads() {
+    fetch('/api/threads')
+      .then(response => response.json())
+      .then(threads => {
+        const threadsContainer = document.getElementById('threads');
+        threadsContainer.innerHTML = '';  // 既存のスレッドをクリア
+
+        threads.forEach(thread => {
+          const threadElement = document.createElement('div');
+          threadElement.classList.add('thread');
+          threadElement.textContent = thread.title;
+          threadElement.dataset.id = thread.id;  // スレッドIDをdata属性に追加
+          threadElement.addEventListener('click', function() {
+            loadPosts(thread.id);  // スレッド選択時に投稿を読み込む
+            selectThread(threadElement);  // スレッド選択時に視覚的に反映
+          });
+          threadsContainer.appendChild(threadElement);
+        });
+      })
+      .catch(error => console.error('スレッド読み込みエラー:', error));
+  }
+
   // サーバーから投稿データを取得して表示する関数
-  function loadPosts() {
-    fetch('/api/posts')
+  function loadPosts(threadId) {
+    fetch(`/api/posts?threadId=${threadId}`)
       .then(response => response.json())
       .then(posts => {
         const postsContainer = document.getElementById('posts');
@@ -28,11 +51,41 @@ window.onload = function() {
 
           postsContainer.appendChild(postElement);
         });
-      });
+      })
+      .catch(error => console.error('投稿読み込みエラー:', error));
   }
 
-  // 初期表示時にサーバーから投稿を取得
-  loadPosts();
+  // スレッド作成ボタンがクリックされたときの処理
+  document.getElementById('create-thread-button').addEventListener('click', function() {
+    const title = document.getElementById('thread-title').value.trim();
+    if (title) {
+      fetch('/api/threads', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title: title }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        loadThreads(); // スレッド作成後にスレッドリストを更新
+        document.getElementById('thread-title').value = ''; // フォームをクリア
+      })
+      .catch(error => console.error('スレッド作成エラー:', error));
+    }
+  });
+
+  // スレッド選択時に視覚的に反映
+  function selectThread(threadElement) {
+    const allThreads = document.querySelectorAll('.thread');
+    allThreads.forEach(thread => {
+      thread.classList.remove('active');
+    });
+    threadElement.classList.add('active');
+  }
+
+  // 初期表示でスレッドをロード
+  loadThreads();
 
   // 画像挿入ボタンがクリックされたときの処理
   document.querySelector('.image-upload-btn').addEventListener('click', function() {
@@ -68,6 +121,7 @@ window.onload = function() {
   document.getElementById('post-button').addEventListener('click', function() {
     const input = document.getElementById('post-input');
     const text = input.value.trim();
+    const threadId = document.querySelector('.thread.active') ? document.querySelector('.thread.active').dataset.id : null;
 
     if (text || uploadedImageUrl) {
       // サーバーにPOSTリクエストを送る
@@ -76,14 +130,14 @@ window.onload = function() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ text: text, imageUrl: uploadedImageUrl }),
+        body: JSON.stringify({ text: text, imageUrl: uploadedImageUrl, threadId: threadId }),
       })
         .then(response => response.json())
         .then(data => {
           console.log(data.message);
           input.value = '';  // 投稿後に入力欄をクリア
           uploadedImageUrl = null;  // アップロードした画像URLをリセット
-          loadPosts();  // 投稿後に投稿リストを更新
+          loadPosts(threadId);  // 投稿後に選択されているスレッドの投稿を再読み込み
         })
         .catch(error => {
           console.error('投稿エラー:', error);

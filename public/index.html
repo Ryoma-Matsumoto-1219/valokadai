@@ -8,22 +8,35 @@
 </head>
 <body>
   <div class="container">
-    <!-- ここに投稿内容が表示される -->
+    <h1>掲示板</h1>
+
+    <!-- スレッド作成フォーム -->
+    <div class="thread-form">
+      <input type="text" id="thread-title" placeholder="新しいスレッドのタイトル" />
+      <button id="create-thread-button">スレッド作成</button>
+    </div>
+
+    <!-- スレッド一覧 -->
+    <div id="threads">
+      <!-- スレッド一覧がここに表示されます -->
+    </div>
+
+    <!-- 投稿内容の表示エリア -->
     <div id="posts">
       <!-- 投稿された内容がここに表示されます -->
     </div>
 
     <!-- 文字入力欄と投稿ボタン -->
-  <div class="post-form">
-    <!-- 画像挿入ボタン -->
-    <button class="image-upload-btn">画像挿入</button>
-    <!-- 画像選択のためのファイル入力（隠す） -->
-    <input type="file" id="image-upload-input" style="display:none;">
-    <!-- 文字入力欄 -->
-    <textarea id="post-input" placeholder="メッセージを入力..."></textarea>
-    <!-- 投稿ボタン -->
-    <button id="post-button">投稿</button>
-  </div>
+    <div class="post-form">
+      <!-- 画像挿入ボタン -->
+      <button class="image-upload-btn">画像挿入</button>
+      <!-- 画像選択のためのファイル入力（隠す） -->
+      <input type="file" id="image-upload-input" style="display:none;">
+      <!-- 文字入力欄 -->
+      <textarea id="post-input" placeholder="メッセージを入力..."></textarea>
+      <!-- 投稿ボタン -->
+      <button id="post-button">投稿</button>
+    </div>
   </div>
 
   <script src="script.js"></script>

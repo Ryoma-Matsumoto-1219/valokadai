@@ -21,24 +21,48 @@ const upload = multer({
 app.use(express.static(path.join(__dirname, 'public')));  // 公開フォルダ（public）に静的ファイルを置く
 app.use(express.json());  // POSTリクエストでJSONをパース
 
-// 投稿データの保存用（簡単に配列を使う例）
-let posts = [];
+// スレッドデータの保存用（簡単に配列を使う例）
+let threads = [];
+let posts = [];  // 投稿は後でスレッドごとに管理します
 
-// GETリクエストで掲示板の投稿を取得する
-app.get('/api/posts', (req, res) => {
-  res.json(posts);
+// GETリクエストで掲示板のスレッドを取得する
+app.get('/api/threads', (req, res) => {
+  res.json(threads);
 });
 
-// POSTリクエストで新しい投稿を受け取る
-app.post('/api/posts', (req, res) => {
-  const newPost = req.body.text;
-  const imageUrl = req.body.imageUrl;
-  if (newPost || imageUrl) {
-    const post = { text: newPost, imageUrl: imageUrl }; // 投稿に画像URLも追加
-    posts.push(post);
-    res.status(201).json({ message: '投稿が成功しました' });
+// POSTリクエストで新しいスレッドを作成する
+app.post('/api/threads', (req, res) => {
+  const { title } = req.body;
+  if (title) {
+    const newThread = { id: threads.length + 1, title: title };
+    threads.push(newThread);
+    res.status(201).json(newThread);  // 作成したスレッドを返す
   } else {
-    res.status(400).json({ message: '投稿が空です' });
+    res.status(400).json({ message: 'スレッドタイトルが必要です' });
+  }
+});
+
+// GETリクエストでスレッドに関連する投稿を取得する
+app.get('/api/posts', (req, res) => {
+  const { threadId } = req.query;
+  if (threadId) {
+    const threadPosts = posts.filter(post => post.threadId === parseInt(threadId));
+    res.json(threadPosts);
+  } else {
+    res.status(400).json({ message: 'スレッドIDが必要です' });
+  }
+});
+
+// POSTリクエストで新しい投稿を受け取る（スレッドIDを指定して投稿）
+app.post('/api/posts', (req, res) => {
+  let { text, imageUrl, threadId } = req.body;
+  if (threadId && (text || imageUrl)) {
+    threadId = parseInt(threadId)
+    const newPost = { text, imageUrl, threadId };
+    posts.push(newPost);
+    res.status(201).json(newPost);  // 作成した投稿を返す
+  } else {
+    res.status(400).json({ message: 'スレッドIDと投稿内容が必要です' });
   }
 });
 
