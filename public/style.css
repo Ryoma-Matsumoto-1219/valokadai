@@ -3,6 +3,7 @@ body, html {
   height: 100%;
   margin: 0;
   font-family: Arial, sans-serif;
+  background-color: #404048;
 }
 
 /* コンテナ */
@@ -12,6 +13,11 @@ body, html {
   height: 100%;
   padding: 10px;
   box-sizing: border-box;
+}
+h1{
+  color: #ffffff;
+  background-color: #000000;
+  text-align: center;
 }
 
 /* スレッド作成フォーム */
@@ -23,15 +29,20 @@ body, html {
 }
 
 .thread-form input {
-  width: 80%;
+  width: 85%;
+  height: 20px;
+  margin: 0 auto;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .thread-form button {
+  height: 40px;
   padding: 10px 20px;
-  background-color: #4CAF50;
+  margin: 0 auto;
+  background-color: #EF4050;
   color: white;
   border: none;
   border-radius: 5px;
@@ -39,12 +50,14 @@ body, html {
 }
 
 .thread-form button:hover {
-  background-color: #45a049;
+  background-color: #EF4050;
 }
 
 /* スレッド一覧 */
 #threads {
   margin-bottom: 20px;
+  max-height: 30vh;
+  overflow-y: auto;
 }
 
 #threads .thread {
@@ -70,6 +83,9 @@ body, html {
   flex-grow: 1; /* 残りの空間を埋める */
   overflow-y: auto; /* もし投稿が多くなったらスクロール可能 */
   margin-bottom: 20px;
+  max-height: calc(80vh - 160px);
+  color: #ffffff;
+  font-weight: bold;
 }
 
 /* 文字入力欄と投稿ボタンの配置 */
@@ -82,17 +98,17 @@ body, html {
   bottom: 10px;
   left: 10px;
   right: 10px;
-  background-color: white;
+  background-color:#426579;
   padding: 10px;
   box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
 }
 
 textarea {
-  width: 70%;  /* 入力欄の幅を調整 */
+  width: 85%;  /* 入力欄の幅を調整 */
   height: 40px;
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #ccc;
+  border: 1px solid #000000;
   border-radius: 5px;
   resize: none; /* ユーザーがリサイズできないようにする */
   margin-left: 10px; /* ボタンとの間に隙間を作る */
@@ -102,7 +118,7 @@ textarea {
 /* 画像挿入ボタン */
 .image-upload-btn {
   padding: 10px 20px;
-  background-color: #008CBA;
+  background-color: #000000;
   color: white;
   border: none;
   border-radius: 5px;
@@ -111,12 +127,12 @@ textarea {
 }
 
 .image-upload-btn:hover {
-  background-color: #007bb5;
+  background-color: #000000;
 }
 
 button {
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: #EF4050;
   color: white;
   border: none;
   border-radius: 5px;
@@ -124,5 +140,21 @@ button {
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #EF4050;
 }
+
+/* スレッドリストの表示/非表示ボタン */
+#toggle-threads {
+  padding: 10px 20px;
+  background-color: #000000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+#toggle-threads:hover {
+  background-color: #000000;
+}
+

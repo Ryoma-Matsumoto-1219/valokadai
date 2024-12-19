@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>掲示板</title>
+  <title>ヴァロ掲</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1>掲示板</h1>
+    <h1>ヴァロ掲</h1>
 
     <!-- スレッド作成フォーム -->
     <div class="thread-form">
       <input type="text" id="thread-title" placeholder="新しいスレッドのタイトル" />
-      <button id="create-thread-button">スレッド作成</button>
+      <button id="create-thread-button">作成</button>
+      <button id="toggle-threads">表示/非表示</button> 
     </div>
 
     <!-- スレッド一覧 -->
@@ -23,13 +24,12 @@
 
     <!-- 投稿内容の表示エリア -->
     <div id="posts">
-      <!-- 投稿された内容がここに表示されます -->
     </div>
 
     <!-- 文字入力欄と投稿ボタン -->
     <div class="post-form">
       <!-- 画像挿入ボタン -->
-      <button class="image-upload-btn">画像挿入</button>
+      <button class="image-upload-btn">画像</button>
       <!-- 画像選択のためのファイル入力（隠す） -->
       <input type="file" id="image-upload-input" style="display:none;">
       <!-- 文字入力欄 -->

@@ -144,4 +144,36 @@ window.onload = function() {
         });
     }
   });
+
+  
+
+  // スレッド表示/非表示ボタンの処理
+document.getElementById('toggle-threads').addEventListener('click', function() {
+  const threadsContainer = document.getElementById('threads');
+  
+  // スレッド一覧が表示されていれば非表示に、非表示なら表示する
+  if (threadsContainer.style.display === 'none') {
+    threadsContainer.style.display = 'block'; // スレッド一覧を表示
+  } else {
+    threadsContainer.style.display = 'none'; // スレッド一覧を非表示
+  }
+});
+
+// Enterキーでスレッド作成
+document.getElementById('thread-title').addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+    event.preventDefault();  // Enterキーのデフォルト動作を無効化
+    document.getElementById('create-thread-button').click();  // スレッド作成ボタンをクリック
+  }
+});
+
+// Enterキーで投稿
+document.getElementById('post-input').addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+    event.preventDefault();  // Enterキーのデフォルト動作を無効化
+    document.getElementById('post-button').click();  // 投稿ボタンをクリック
+  }
+});
 };
+
+
