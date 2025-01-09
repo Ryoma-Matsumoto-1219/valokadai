@@ -87,6 +87,17 @@ h1{
   color: #ffffff;
   font-weight: bold;
 }
+/* 番号を青色にする */
+.post-number {
+  color: red;
+  margin-right: 10px;  /* 番号と投稿時間の間に空白を追加 */
+}
+
+/* 投稿時間のスタイル */
+.post-time {
+  color: #03f917;  /* 任意で投稿時間の色を少し変えることができます */
+}
+
 
 /* 文字入力欄と投稿ボタンの配置 */
 .post-form {

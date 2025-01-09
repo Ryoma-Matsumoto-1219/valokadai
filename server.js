@@ -57,10 +57,17 @@ app.get('/api/posts', (req, res) => {
 app.post('/api/posts', (req, res) => {
   let { text, imageUrl, threadId } = req.body;
   if (threadId && (text || imageUrl)) {
-    threadId = parseInt(threadId)
-    const newPost = { text, imageUrl, threadId };
+    threadId = parseInt(threadId);
+    
+    // 現在の日時を取得
+    const postTime = new Date().toISOString();  // ISO 8601 形式で日時を取得
+
+    // 新しい投稿を作成
+    const newPost = { text, imageUrl, threadId, postTime };
     posts.push(newPost);
-    res.status(201).json(newPost);  // 作成した投稿を返す
+    
+    // 作成した投稿を返す（投稿日時を含む）
+    res.status(201).json(newPost);
   } else {
     res.status(400).json({ message: 'スレッドIDと投稿内容が必要です' });
   }

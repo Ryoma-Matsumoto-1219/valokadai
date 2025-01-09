@@ -26,12 +26,16 @@
     <div id="posts">
     </div>
 
+
     <!-- 文字入力欄と投稿ボタン -->
     <div class="post-form">
       <!-- 画像挿入ボタン -->
       <button class="image-upload-btn">画像</button>
       <!-- 画像選択のためのファイル入力（隠す） -->
       <input type="file" id="image-upload-input" style="display:none;">
+      <!-- 画像プレビューとキャンセルボタン -->
+    <div id="image-preview-container"></div>
+    <button id="cancel-upload" style="display:none;">キャンセル</button>
       <!-- 文字入力欄 -->
       <textarea id="post-input" placeholder="メッセージを入力..."></textarea>
       <!-- 投稿ボタン -->
